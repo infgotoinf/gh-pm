@@ -1,4 +1,4 @@
-[Ссылка на .docx формат](docx/01.docx)
+[Ссылка на .docx формат](https://github.com/infgotoinf/gh-pm/raw/refs/heads/main/docs/docx/01.docx)
 
 # Предметная область
 
