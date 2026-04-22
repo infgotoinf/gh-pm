@@ -1,6 +1,6 @@
 # Table of contents
 
-* [01 Анализ предметной области](README.md)
+* [01 Анализ предметной области](01-analiz-predmenoi-oblasti.md)
 * [02 Разработка и анализ требований к программной среде](02-razrabotka-i-analiz-trebovanii-k-programmnoi-srede.md)
 * [03 Разработка технического задания](03-razrabotka-tekhnicheskogo-zadaniya.md)
 * [04 Выделение входных и выходных данных системы](04-vydelenie-vkhodnykh-i-vykhodnykh-dannykh-sistemy.md)
