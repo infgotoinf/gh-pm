@@ -1,0 +1,2 @@
+For converting from github .wiki to .docx
+pandoc -F mermaid-filter ../01-Анализ-предметной-области.md --reference-doc=01.docx -o lol.docx
