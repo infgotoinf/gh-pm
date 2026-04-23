@@ -1,0 +1,16 @@
+{
+  "packages": {
+    "gh": "latest",
+    "ftxui": "6.1.9",
+    "gh-token": "latest",
+    "gcc": "latest",
+    "cmake": "latest",
+    "ninja": "latest",
+    "ccache": "latest",
+    "clang-tools": "latest",
+    "git": "latest"
+  },
+  "env": {
+    "CMAKE_CXX_COMPILER_LAUNCHER": "ccache"
+  }
+}

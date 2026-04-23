@@ -17,7 +17,7 @@ if(CMAKE_EXPORT_COMPILE_COMMANDS)
 endif()
 
 
-add_subdirectory(external/ftxui)
+find_package(ftxui REQUIRED)
 
 add_executable(game)
 
