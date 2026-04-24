@@ -1,14 +1,16 @@
 {
   "packages": {
     "gh": "latest",
+    "git": "latest",
     "ftxui": "6.1.9",
-    "gh-token": "latest",
+    "nlohmann_json": "latest",
     "gcc": "latest",
     "cmake": "latest",
     "ninja": "latest",
     "ccache": "latest",
     "clang-tools": "latest",
-    "git": "latest"
+    "python": "3.14.3",
+    "python314Packages.ghapi": "latest"
   },
   "env": {
     "CMAKE_CXX_COMPILER_LAUNCHER": "ccache"

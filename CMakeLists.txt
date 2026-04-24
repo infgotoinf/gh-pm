@@ -17,7 +17,7 @@ if(CMAKE_EXPORT_COMPILE_COMMANDS)
 endif()
 
 
-find_package(ftxui REQUIRED)
+find_package(ftxui pybind11 REQUIRED)
 
 add_executable(game)
 
