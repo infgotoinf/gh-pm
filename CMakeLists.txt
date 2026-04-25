@@ -17,7 +17,8 @@ if(CMAKE_EXPORT_COMPILE_COMMANDS)
 endif()
 
 
-find_package(ftxui pybind11 REQUIRED)
+find_package(ftxui REQUIRED)
+find_package(nlohmann_json REQUIRED)
 
 add_executable(game)
 
@@ -38,4 +39,5 @@ target_link_libraries(game
     ftxui::screen
     ftxui::dom
     ftxui::component
+    nlohmann_json::nlohmann_json
 )

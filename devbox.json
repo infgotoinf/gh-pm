@@ -1,7 +1,6 @@
 {
   "packages": {
     "gh": "latest",
-    "git": "latest",
     "ftxui": "6.1.9",
     "nlohmann_json": "latest",
     "gcc": "latest",
@@ -9,8 +8,6 @@
     "ninja": "latest",
     "ccache": "latest",
     "clang-tools": "latest",
-    "python": "3.14.3",
-    "python314Packages.ghapi": "latest"
   },
   "env": {
     "CMAKE_CXX_COMPILER_LAUNCHER": "ccache"
