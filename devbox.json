@@ -1,13 +1,13 @@
 {
   "packages": {
-    "gh": "latest",
-    "ftxui": "6.1.9",
-    "nlohmann_json": "latest",
-    "gcc": "latest",
-    "cmake": "latest",
-    "ninja": "latest",
-    "ccache": "latest",
-    "clang-tools": "latest",
+    "gh": "latest"
+  , "ftxui": "6.1.9"
+  , "nlohmann_json": "latest"
+  , "gcc": "latest"
+  , "cmake": "latest"
+  , "ninja": "latest"
+  , "ccache": "latest"
+  , "clang-tools": "latest"
   },
   "env": {
     "CMAKE_CXX_COMPILER_LAUNCHER": "ccache"
