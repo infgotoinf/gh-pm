@@ -1,3 +1,3 @@
-# 04 Выделение входных и выходных данных системы
+[Ссылка на .docx формат](https://github.com/infgotoinf/gh-pm/raw/refs/heads/main/docs/docx/04.docx)
 
-Please paste the extracted Markdown content you want transformed, and I’ll clean it up for GitBook format.
+# Перечень классов предметной области
