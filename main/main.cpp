@@ -1,8 +1,9 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
-#include <exception>
 #include <ftxui/component/animation.hpp>
+#include <map>
+#include <nlohmann/detail/string_concat.hpp>
 #include <stddef.h>
 #include <chrono>
 #include <functional>
@@ -61,22 +62,59 @@ std::string makeGETRequest(const std::string& query, const GETRequest get_reques
     return response;
 }
 
-class Field {
-public:
+struct Field {
     std::string name;
+    std::string description;
+    char color[6];
 };
 
-class View {
-public:
-
+struct FieldGroup {
+    std::string name;
+    std::map<std::string, Field> field;
 };
 
-class Project {
-public:
+struct View {
+    FieldGroup vertical_field_group;
+    std::string name;
+    int number;
+};
+
+
+struct SubIssueSummary {
+    int completed;
+    int total;
+    int percent_completed;
+};
+
+struct Issue {
+    SubIssueSummary sub_issue_summary;
+    std::string repository_name;
+    std::string title;
+    int number;
+    bool is_closed;
+    bool is_locked;
+};
+
+
+struct Lable {
+    std::string name;
+    char color[6];
+};
+
+struct Item {
+    std::vector<Issue> issues;
+    std::vector<Lable> labels;
     std::vector<Field> fields;
+    bool is_archived;
+};
+
+struct Project {
+    std::vector<Item> items;
     std::vector<View> views;
     std::string title;
     int number;
+    Project(std::string t_title = "", int t_number = 0);
+    void initFromGETRequest(int t_number);
 };
 
 
@@ -97,8 +135,8 @@ R"(query {
     const std::string response = makeGETRequest(query, GETRequest::WITHOUT_OWNER_AND_REPO_VARS);
     const json parsed_response = json::parse(response);
     for(auto& j : parsed_response["data"]["viewer"]["projectsV2"]["nodes"]) {
-        projects.push_back(Project{ .title  = j["title"]
-                                  , .number = j["number"] });
+        // projects.push_back(Project{ .title  = j["title"]
+        //                           , .number = j["number"] });
     }
     return projects;
 }
@@ -126,28 +164,68 @@ Project fetchProject(int project_number)
     const std::string query =
 R"(query {
   viewer {
+
+    # Project
     projectV2(number:)" + std::to_string(project_number) + R"() {
       number
       title
-      fields(first: 100) {
+
+      # Views
+      views(first: 10) {
         nodes {
-          ... on ProjectV2Field { dataType name }
-          ... on ProjectV2IterationField { dataType name }
-          ... on ProjectV2SingleSelectField { dataType name options { color description name } }
+          name
+          number
+          layout
+          verticalGroupByFields(first: 10) {
+            nodes {
+              ... on ProjectV2SingleSelectField {
+                name
+                options {
+                  name
+                  description
+                  color
+                }
+              }
+            }
+          }
         }
       }
+
+      # Project items
       items(first: 100) {
         nodes {
-          id
+          content {
+
+            # Issue specific content
+            ... on Issue {
+              repository { name }
+              title
+              number
+              closed
+              locked
+              subIssuesSummary {
+                completed
+                total
+                percentCompleted
+              }
+            }
+          }
+
+          # General item content
+          isArchived
           fieldValues(first: 100) {
             nodes {
-              __typename
-              ... on ProjectV2ItemFieldTextValue { text }
-              ... on ProjectV2ItemFieldSingleSelectValue { name }
-              ... on ProjectV2ItemFieldIterationValue { title }
-              ... on ProjectV2ItemFieldDateValue { date }
-              ... on ProjectV2ItemFieldNumberValue { number }
-              ... on ProjectV2ItemFieldUserValue { users { nodes { login } } }
+              ... on ProjectV2ItemFieldLabelValue {
+                labels(first: 10) {
+                  nodes {
+                    name
+                    color
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldSingleSelectValue {
+                name
+              }
             }
           }
         }
@@ -158,8 +236,8 @@ R"(query {
     const std::string response = makeGETRequest(query, GETRequest::WITHOUT_OWNER_AND_REPO_VARS);
     const json parsed_response = json::parse(response);
     auto j = parsed_response["data"]["viewer"]["projectV2"];
-    project = Project{ .title  = j["title"]
-                     , .number = j["number"] };
+    // project = Project{ .title  = j["title"]
+    //                  , .number = j["number"] };
     return project;
 }
 
